@@ -265,3 +265,58 @@ def delete_tweet():
         )
 def update_tweet():
     pass
+
+### Show all Retweets
+@app.get(
+            path="/",
+            response_model=list[Retweets],
+            status_code=status.HTTP_200_OK,
+            summary="Show all Retweet",
+            tags=["Retweet"]
+        )
+def home():
+    return {"Twitter API": "Working!"}
+
+### Post Retweet
+@app.post(
+            path="/post",
+            response_model=Retweet,
+            status_code=status.HTTP_201_CREATED,
+            summary="Post a Retweet",
+            tags=["Retweet"]
+        )
+def post_retweet():
+    pass
+
+### Show a Retweet
+@app.get(
+            path="/retweet/{retweet_id}",
+            response_model=Retweet,
+            status_code=status.HTTP_200_OK,
+            summary="Show a Retweet",
+            tags=["Retweet"]
+        )
+def show_retweet():
+    pass
+
+### Delete a Retweet
+@app.delete(
+                path="/retweet/{retweet_id}/delete",
+                status_code=status.HTTP_204_NO_CONTENT,
+                summary="Delete a Retweet",
+                tags=["Retweet"]
+            )
+def delete_retweet():
+    pass
+
+### Update a Retweet
+@app.put(
+            path="/tweet/{tweet_id}/update",
+            response_model=Tweet,
+            status_code=status.HTTP_200_OK,
+            summary="Update a Retweet",
+            tags=["Retweet"]
+        )
+def update_retweet():
+    pass
+    
