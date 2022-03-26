@@ -48,6 +48,17 @@ class Tweet(BaseModel):
     updated_at: Optional[datetime] = Field(default=None)
     by: User = Field(...)
 
+class Retweet(BaseModel):
+    retweet_id: UUID = Field(...)
+    content: str = Field(
+                        ..., 
+                        min_length=1, 
+                        max_length=256
+                    )
+    created_at: datetime = Field(default=datetime.now())
+    updated_at: Optional[datetime] = Field(default=None)
+    by: User = Field(...)
+
 # Path Operations
 ## Users
 
@@ -269,7 +280,7 @@ def update_tweet():
 ### Show all Retweets
 @app.get(
             path="/",
-            response_model=list[Retweets],
+            response_model=list[Retweet],
             status_code=status.HTTP_200_OK,
             summary="Show all Retweet",
             tags=["Retweet"]
@@ -311,8 +322,8 @@ def delete_retweet():
 
 ### Update a Retweet
 @app.put(
-            path="/tweet/{tweet_id}/update",
-            response_model=Tweet,
+            path="/retweet/{retweet_id}/update",
+            response_model=Retweet,
             status_code=status.HTTP_200_OK,
             summary="Update a Retweet",
             tags=["Retweet"]
